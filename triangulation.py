@@ -30,6 +30,7 @@ from drawing_utils import draw_SVG_path, draw_SVG_rect
 try:
 	import numpy as np
 	from scipy.spatial import Delaunay
+	from scipy.cluster.vq import kmeans2
 	import cv2
 except:
 	inkex.errormsg("This extension needs the followin modules to be installed: numpy, scipy and cv2.")
@@ -200,10 +201,11 @@ class Triangulation(inkex.Effect):
 		gray = cv2.cvtColor(imcv,cv2.COLOR_RGB2GRAY)
 		gray = np.float32(gray)
 		# Find edges
-		edges = cv2.Canny(imcv, self.options.edge_thresh_min, self.options.edge_thresh_max)
+		edges = cv2.Canny(imcv, self.options.edge_thresh_min, self.options.edge_thresh_max, 100)
 		# Find coordinates of the edges
 		coords = [(x,y) for y, row in enumerate(edges) for x, col in enumerate(row) if col>0]
-		pt = random.sample(coords, self.options.num_points)
+#		pt = random.sample(coords, self.options.num_points)
+		pt, idx = kmeans2(np.array(coords), self.options.num_points, minit="points")
 
 		if self.options.add_corners:
 			# Add the four corners
