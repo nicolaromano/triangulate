@@ -2,16 +2,13 @@
 <inkscape-extension>
 	<_name>Triangulation</_name>
 	<id>org.inkscape.triangulation</id>
-	<dependency type="executable" location="extensions">triangulation.py</dependency>
-	<dependency type="executable" location="extensions">inkex.py</dependency>
-
 	<param name="tab" type="notebook">
-		<page name="tab" _gui-text="Options">
-			<param name="num_points" type="int" min="20" max="10000" _gui-text="Sampled points:">150</param>
-			<param name="edge_thresh_min" type="int" min="0" max="255" _gui-text="Edge detection min">200</param>
-			<param name="edge_thresh_max" type="int" min="0" max="255" _gui-text="Edge detection max">255</param>
-			<param name="gradient_fill" type="boolean" _gui-text="Gradient fill">0</param>
-			<param name="add_corners" type="boolean" _gui-text="Add corners">0</param>
+		<page name="tab" gui-text="Options">
+			<param name="num_points" type="int" min="20" max="10000" gui-text="Sampled points:">150</param>
+			<param name="edge_thresh_min" type="int" min="0" max="255" gui-text="Edge detection min">200</param>
+			<param name="edge_thresh_max" type="int" min="0" max="255" gui-text="Edge detection max">255</param>
+			<param name="gradient_fill" type="bool" gui-text="Gradient fill">false</param>
+			<param name="add_corners" type="bool" gui-text="Add corners">false</param>
 		</page>
 	</param>
 
@@ -22,6 +19,6 @@
 		</effects-menu>
 	</effect>
 	<script>
-		<command reldir="extensions" interpreter="python">triangulation.py</command>
+		<command location="inx" interpreter="python">triangulation.py</command>
 	</script>
 </inkscape-extension>
